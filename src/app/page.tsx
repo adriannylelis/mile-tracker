@@ -1,4 +1,5 @@
 import TrendsChart from "@/app/(dashboard)/charts/TrendsChart";
+import PricesTable from "@/app/(dashboard)/tables/PricesTable";
 
 export default function Home() {
   return (
@@ -8,6 +9,10 @@ export default function Home() {
         <section>
           <h2 className="mb-2 text-lg font-medium">Tendências do Milheiro</h2>
           <TrendsChart />
+        </section>
+        <section>
+          <h2 className="mb-2 text-lg font-medium">Últimos preços</h2>
+          <PricesTable />
         </section>
       </main>
     </div>

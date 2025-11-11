@@ -29,7 +29,7 @@ From the `docker/` folder:
 ```
 docker compose up -d --build
 ```
-App: http://localhost:3000
+App: http://localhost:3001
 DB:  localhost:5432 (postgres/postgres)
 
 Note: Run Prisma migrations once your DB is up:

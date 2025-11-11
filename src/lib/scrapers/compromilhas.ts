@@ -1,9 +1,5 @@
-import { ScrapeResult } from "@/lib/scrapers/types";
+import { Scraper } from "@/lib/scrapers/types";
 
-export async function scrapeComproMilhas(): Promise<ScrapeResult | null> {
-  try {
-    return null;
-  } catch {
-    return null;
-  }
-}
+export const scrapeComproMilhas: Scraper = async () => {
+  return null;
+};

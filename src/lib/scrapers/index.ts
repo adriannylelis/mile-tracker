@@ -24,26 +24,26 @@ export async function ensureSources() {
 }
 
 export async function runAllScrapers() {
-  await ensureSources();
+  const map = await ensureSources();
 
   const tasks: Array<Promise<unknown | null>> = [
     (async () => {
-      const res = await scrapeHotMilhas();
+      const res = await scrapeHotMilhas({ sourceId: map["HotMilhas"] });
       if (!res) return null;
       return prisma.mileagePrice.create({ data: { ...res } });
     })(),
     (async () => {
-      const res = await scrapeMaxMilhas();
+      const res = await scrapeMaxMilhas({ sourceId: map["MaxMilhas"] });
       if (!res) return null;
       return prisma.mileagePrice.create({ data: { ...res } });
     })(),
     (async () => {
-      const res = await scrape123Milhas();
+      const res = await scrape123Milhas({ sourceId: map["123Milhas"] });
       if (!res) return null;
       return prisma.mileagePrice.create({ data: { ...res } });
     })(),
     (async () => {
-      const res = await scrapeComproMilhas();
+      const res = await scrapeComproMilhas({ sourceId: map["ComproMilhas"] });
       if (!res) return null;
       return prisma.mileagePrice.create({ data: { ...res } });
     })(),

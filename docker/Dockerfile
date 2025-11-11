@@ -1,16 +1,17 @@
-FROM node:20-alpine AS base
+FROM node:20-bullseye-slim AS base
 WORKDIR /app
 
-# Install dependencies separately for better layer caching
+# Install all dependencies (dev + prod) for dev workflow
 COPY package*.json ./
-RUN npm install --omit=dev
+RUN npm install
+
+# Install Playwright browser binaries and dependencies
+RUN npx playwright install --with-deps chromium
 
 # Copy source
 COPY . .
 
-# Build (Next.js standalone output could be configured later)
-RUN npm run build
-
-ENV NODE_ENV=production
+ENV NODE_ENV=development
 EXPOSE 3000
-CMD ["npm", "start"]
+# For dev compose we run the Next.js dev server
+CMD ["npm", "run", "dev"]
