@@ -1,0 +1,32 @@
+// Prisma schema for MileTracker
+// Defines MileageSource and MileagePrice models per instructions
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model MileageSource {
+  id        String        @id @default(uuid())
+  name      String
+  url       String
+  program   String        // Smiles | TudoAzul | LatamPass
+  createdAt DateTime      @default(now())
+  prices    MileagePrice[]
+}
+
+model MileagePrice {
+  id         String        @id @default(uuid())
+  sourceId   String
+  price      Float
+  milheiro   Float
+  capturedAt DateTime      @default(now())
+  source     MileageSource @relation(fields: [sourceId], references: [id])
+
+  @@index([sourceId])
+  @@index([capturedAt])
+}
